@@ -1,0 +1,178 @@
+class Node1{
+    Node1 prev = null;
+    int data;
+    Node1 next =null;
+    Node1(int data){
+        this.data=data;
+
+    }
+}
+class DoublyLinkedList {
+    Node1 head = null;
+
+    //addFirst
+
+    void addFirst(int data){
+        Node1 newNode = new Node1(data);
+        if(head==null){
+            head=newNode;
+        }else {
+            newNode.next=head;
+            head.prev = newNode;
+            head=newNode;
+        }
+    }
+    void addLast(int data){
+        Node1 newNOde = new Node1(data);
+        if(head==null){
+            head = newNOde;
+        }
+        else{
+            Node1 temp = head;
+            while(temp.next!=null){
+                temp=temp.next;
+            }
+            temp.next=newNOde;
+            newNOde.prev=temp;
+        }
+
+    }
+    //CountNode
+    int CountNode() {
+        int count = 0;
+        if (head == null) {
+            return count;
+        } else {
+            Node1 temp = head;
+            while ((temp != head)) {
+                count++;
+                temp = temp.next;
+            }
+            return count;
+        }
+    }
+    //addAtPos
+    void addAtPos(int Pos,int data){
+        if(Pos<=0||Pos>=CountNode()+2){
+            System.out.println("Wrong input");
+            return;
+        }
+        if(Pos==1){
+            addFirst(data);
+        } else if (Pos==CountNode()+1) {
+            addLast(data);
+
+        }else {
+            Node1 newNode = new Node1(data);
+            Node1 temp =head;
+            while (Pos-2!=0){
+                temp = temp.next;
+                Pos--;
+            }
+            newNode.prev=temp;
+            newNode.next=temp.next;
+            temp.next=newNode;
+            newNode.next.prev=newNode;
+        }
+
+    }
+    //delFirst
+
+    void delFirst(){
+        if(head==null){
+            System.out.println("Empty LinkList");
+            return;
+        }
+        if(CountNode()==1){
+            head = null;
+        }else {
+            head=head.next;
+            head.prev=null;
+        }
+
+    }
+    //delLast
+
+    void delLast(){
+        if(head==null){
+            System.out.println("Empty LinkedList");
+        }
+        if(CountNode()==1){
+            head=null;
+        }else{
+            Node1 temp =head;
+            while (temp.next!=null){
+                temp=temp.next;
+            }
+            temp.prev.next = null;
+            temp.prev=null;
+        }
+
+    }
+    // delAtPos
+
+    void delAtPos(int Pos){
+        if(Pos<=0||Pos>=CountNode()+1){
+            System.out.println("Wrong Input");
+            return;
+        }
+        if(Pos==1){
+            delFirst();
+        } else if (Pos==CountNode()) {
+            delLast();
+
+        }else {
+            Node1 temp = head;
+            while (Pos-2!=0){
+                temp = temp.next;
+                Pos--;
+            }
+            temp.next=temp.next.next;
+            temp.next.prev=temp;
+        }
+
+    }
+    //PrintDLL
+
+    void PrintDLL() {
+        if (head == null) {
+            System.out.println("Empty LinkedList");
+        } else {
+            Node1 temp = head;
+            while (temp.next != null) {
+                System.out.print(temp.data + "->");
+                temp = temp.next;
+            }
+            System.out.println(temp.data);
+        }
+    }
+}
+class Client1 {
+    public static void main(String[] args) {
+        DoublyLinkedList ll = new DoublyLinkedList();
+
+        ll.addFirst(10);
+        ll.addFirst(20);
+        ll.addFirst(30);
+        ll.PrintDLL();
+
+        ll.addLast(15);
+        ll.PrintDLL();
+
+        ll.addAtPos(5,25);
+        ll.PrintDLL();
+
+        ll.delFirst();
+        ll.PrintDLL();
+
+        ll.delLast();
+        ll.PrintDLL();
+
+        ll.delAtPos(2);
+        ll.PrintDLL();
+
+
+
+    }
+}
+
