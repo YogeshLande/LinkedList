@@ -1,0 +1,73 @@
+//In Place Reverse Problem
+
+public class Node2 {
+
+    int data;
+    Node2 next = null;
+
+    Node2(int data) {
+        this.data = data;
+    }
+
+}
+class LinkedListDemo {
+    Node2 head =null;
+
+    void addNode(int data){
+        Node2 newNode = new Node2(data);
+        if(head ==null){
+            head=newNode;
+        }else {
+            Node2 temp = head;
+            while (temp.next!=null){
+                temp=temp.next;
+
+            }
+            temp.next=newNode;
+        }
+    }
+    void reverseitr(){
+        if(head==null){
+            return;
+        }
+        Node2 prev =null;
+        Node2 curr =head;
+        Node2 forward =null;
+
+        while (curr!=null){
+            forward=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=forward;
+
+        }
+        head=prev;
+    }
+    void PrintLL(){
+        if(head==null){
+            System.out.println("Empty LinkList");
+        }else{
+            Node2 temp = head;
+            while (temp.next!=null){
+                System.out.print(temp.data+"->");
+                temp=temp.next;
+            }
+            System.out.println(temp.data);
+        }
+
+    }
+}
+class client3{
+    public static void main(String[] args) {
+        LinkedListDemo ll = new LinkedListDemo();
+        ll.addNode(10);
+        ll.addNode(20);
+        ll.addNode(30);
+        ll.addNode(40);
+        ll.PrintLL();
+
+        ll.reverseitr();
+        ll.PrintLL();
+
+    }
+}
