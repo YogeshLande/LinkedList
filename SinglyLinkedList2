@@ -1,0 +1,91 @@
+//Return Middle Node of LinkList
+
+public class Node3 {
+
+    int data;
+    Node3 next = null;
+
+    Node3(int data) {
+        this.data = data;
+    }
+
+}
+class LinkedListDemo2 {
+    Node3 head =null;
+
+    void addNode(int data){
+        Node3 newNode = new Node3(data);
+        if(head ==null){
+            head=newNode;
+        }else {
+            Node3 temp = head;
+            while (temp.next!=null){
+                temp=temp.next;
+
+            }
+            temp.next=newNode;
+        }
+    }
+    int countNode(){
+        Node3 temp = head;
+        int count =0;
+        while (temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+    void middlenode1(){
+        int len = countNode();
+        Node3 temp =head;
+        int count =0;
+        while (count<len/2){
+            temp=temp.next;
+            count++;
+        }
+        System.out.println(temp.data);
+    }
+    void middleNode2(){
+        Node3 slow =head;
+        Node3 fast =head.next;
+        while (fast!=null){
+            fast=fast.next;
+            if(fast!=null){
+                fast=fast.next;
+                slow=slow.next;
+
+            }
+            System.out.println(slow.data);
+        }
+    }
+    void PrintLL(){
+        if(head==null){
+            System.out.println("Empty LinkList");
+        }else{
+            Node3 temp = head;
+            while (temp.next!=null){
+                System.out.print(temp.data+"->");
+                temp=temp.next;
+            }
+            System.out.println(temp.data);
+        }
+
+    }
+}
+class client4{
+    public static void main(String[] args) {
+        LinkedListDemo2 ll = new LinkedListDemo2();
+        ll.addNode(10);
+        ll.addNode(20);
+        ll.addNode(30);
+        ll.addNode(40);
+        ll.PrintLL();
+
+        ll.middlenode1();
+
+
+        ll.middleNode2();
+
+
+    }
+}
